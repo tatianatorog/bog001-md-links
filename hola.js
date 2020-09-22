@@ -57,7 +57,7 @@ const getLinksInFileMd = (filePath) =>
       if (err) {
         reject ('No encontrado');
       }else{
-      const regEx = /\[([^\[\]]+)\]\((?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])\)/igm
+      const regEx = /\[([^\[\]]+)\]\/igm
       const matchRegex = data.match(regEx);
       const arrayRegex = [];
       matchRegex.forEach((element) =>{
