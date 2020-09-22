@@ -5,28 +5,45 @@
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
+const glob = require("glob")
 
-// //joining path of directory
-// const directoryPath = path.join("/Users/albalucia/Desktop/curso/", 'modulos');
-// //passsing directoryPath and callback function
-// fs.readdir(directoryPath, function (err, files) {
-//     //handling error
-//     if (err) {
-//         return console.log('Unable to scan directory: ' + err);
-//     }
-//     //listing all files using forEach
-//     files.forEach(function (file) {
-//         // Do whatever you want to do with the file
-//         console.log(file);
-//     });
+// const getDirectories = function (src, callback) {
+//   glob(src + '**/*.md', callback);
+// };
+// getDirectories('/Users/albalucia/Desktop/curso/', function (err, res) {
+//   if (err) {
+//     console.log('Error', err);
+//   } else {
+//     console.log(res);
+//   }
 // });
+
+function walk(directory, filepaths = []) {
+  const files = fs.readdirSync(directory);
+  console.log(files)
+  for (let filename of files) {
+      const filepath = path.join(directory, filename);
+      console.log(filepath)
+
+      if (fs.statSync(filepath).isDirectory()) {
+          walk(filepath, filepaths);
+      } else if (path.extname(filename) === '.md') {
+          filepaths.push(filepath);
+      }
+  }
+  // return filepaths;
+}
+
+
+
+
 
 // const crawl = (dir) => {
 //   console.log('[+]', dir);
 //   let files = fs.readdirSync(dir);
 //   for (let x in files) {
 //     let next = path.join(dir, files[x]);
-//     //console.log(next);
+
 //     if (fs.lstatSync(next).isDirectory() == true) {
 //       crawl(next);
 //     }
@@ -36,7 +53,8 @@ const axios = require('axios');
 //   }
 // }
 
-// console.log(crawl("/Users/albalucia/Desktop/curso/"))
+console.log(walk("/Users/albalucia/Desktop/curso/"))
+
 
 
 // AXIOS Realizar peticiones HTTP desde Nodejs.
@@ -62,14 +80,14 @@ const findLinksInMd = (path) => {
           const href = textHrefDivide[1].replace(")", "");
           return ({ href, text, path });
         });
-        resolve (links)
+        console.log(links)
       }
     });
   });
 };
 
 
-findLinksInMd("README.md")
+findLinksInMd("/Users/albalucia/Desktop/curso/modulos/prueba.md")
 .then((links)=> console.log(links))
 .catch(error => console.error(error));
 
@@ -97,8 +115,9 @@ const resolveValidate = (links) => {
       console.log(stats)
         ;
     })
-    .catch(() => reject(new Error(`NOT founds links to validate ${path}`)));
+    .catch(() => reject(new Error(`no links to validate were found on the ${path}`)));
 };
+
 
 
 // console.log(resolveValidate([
@@ -125,7 +144,7 @@ const linksStats = (links) => {
   const broken = failedLinks.length
   console.log({ total, broken })
 };
-// The split methode divides a String into an ordered list of substrings into an ordered list of substrings and returns an array.
+// The split method divides a String into an ordered list of substrings into an ordered list of substrings and returns an array.
 
 // console.log(linksStats([
 //   {
@@ -151,7 +170,5 @@ const linksStats = (links) => {
 //   }
 // ]))
 
-findLinksInMd("README.md")
-.then((links)=> console.log(links))
-.catch(error => console.error(error));
+
 
