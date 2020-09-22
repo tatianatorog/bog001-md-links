@@ -21,22 +21,22 @@ const axios = require('axios');
 //     });
 // });
 
-const crawl = (dir) => {
-  console.log('[+]', dir);
-  let files = fs.readdirSync(dir);
-  for (let x in files) {
-    let next = path.join(dir, files[x]);
-    //console.log(next);
-    if (fs.lstatSync(next).isDirectory() == true) {
-      crawl(next);
-    }
-    else {
-      console.log(next);
-    }
-  }
-}
+// const crawl = (dir) => {
+//   console.log('[+]', dir);
+//   let files = fs.readdirSync(dir);
+//   for (let x in files) {
+//     let next = path.join(dir, files[x]);
+//     //console.log(next);
+//     if (fs.lstatSync(next).isDirectory() == true) {
+//       crawl(next);
+//     }
+//     else {
+//       console.log(next);
+//     }
+//   }
+// }
 
-console.log(crawl("/Users/albalucia/Desktop/curso/"))
+// console.log(crawl("/Users/albalucia/Desktop/curso/"))
 
 
 // AXIOS Realizar peticiones HTTP desde Nodejs.
@@ -54,6 +54,7 @@ const findLinksInMd = (path) => {
       }
       if (!array) {
         console.log("No links found it")
+         reject(err)
       } else {
         const links = array.map((item) => {
           const textHrefDivide = item.split("](")
@@ -67,7 +68,12 @@ const findLinksInMd = (path) => {
   });
 };
 
-console.log(findLinksInMd("/Users/albalucia/Desktop/bog001-md-links/readmePrueba.md"))
+
+findLinksInMd("README.md")
+.then((links)=> console.log(links))
+.catch(error => console.error(error));
+
+
 
 // AXIOS Realizar peticiones HTTP desde Nodejs.
 // Transforma automáticamente la información en formato JSON.
@@ -94,22 +100,23 @@ const resolveValidate = (links) => {
     .catch(() => reject(new Error(`NOT founds links to validate ${path}`)));
 };
 
-console.log(resolveValidate([
-  {
-    href: 'https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback',
-    text: 'Leer un archivo',
-    path: '/Users/albalucia/Desktop/bog001-md-links/README.md'
-  },
-  {
-    href: 'https://nodejs.org/404',
-    text: 'Leer un directorio',
-    path: '/Users/albalucia/Desktop/bog001-md-links/README.md'
-  },
-  {
-    href: 'https://nodejs.omedium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e',
-    text: 'Path',
-    path: '/Users/albalucia/Desktop/bog001-md-links/README.md'
-  }]))
+
+// console.log(resolveValidate([
+//   {
+//     href: 'https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback',
+//     text: 'Leer un archivo',
+//     path: '/Users/albalucia/Desktop/bog001-md-links/README.md'
+//   },
+//   {
+//     href: 'https://nodejs.org/404',
+//     text: 'Leer un directorio',
+//     path: '/Users/albalucia/Desktop/bog001-md-links/README.md'
+//   },
+//   {
+//     href: 'https://nodejs.omedium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e',
+//     text: 'Path',
+//     path: '/Users/albalucia/Desktop/bog001-md-links/README.md'
+//   }]))
 
 
 const linksStats = (links) => {
@@ -120,28 +127,31 @@ const linksStats = (links) => {
 };
 // The split methode divides a String into an ordered list of substrings into an ordered list of substrings and returns an array.
 
-console.log(linksStats([
-  {
-    url: 'https://es.wikipedia.org/wiki/Markdown',
-    text: 'Markdown',
-    file: '/Users/albalucia/Desktop/bog001-md-links/README.md',
-    status: 200,
-    statusText: 'OK'
-  },
-  {
-    url: 'https://nodejs.org/',
-    text: 'Node.js',
-    file: '/Users/albalucia/Desktop/bog001-md-links/README.md',
-    status: 200,
-    statusText: 'OK'
-  },
-  {
-    url: 'https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg',
-    text: 'md-links',
-    file: '/Users/albalucia/Desktop/bog001-md-links/README.md',
-    status: 200,
-    statusText: 'OK'
-  }
-]))
+// console.log(linksStats([
+//   {
+//     url: 'https://es.wikipedia.org/wiki/Markdown',
+//     text: 'Markdown',
+//     file: '/Users/albalucia/Desktop/bog001-md-links/README.md',
+//     status: 200,
+//     statusText: 'OK'
+//   },
+//   {
+//     url: 'https://nodejs.org/',
+//     text: 'Node.js',
+//     file: '/Users/albalucia/Desktop/bog001-md-links/README.md',
+//     status: 200,
+//     statusText: 'OK'
+//   },
+//   {
+//     url: 'https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg',
+//     text: 'md-links',
+//     file: '/Users/albalucia/Desktop/bog001-md-links/README.md',
+//     status: 200,
+//     statusText: 'OK'
+//   }
+// ]))
 
+findLinksInMd("README.md")
+.then((links)=> console.log(links))
+.catch(error => console.error(error));
 
