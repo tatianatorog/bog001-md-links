@@ -5,45 +5,61 @@
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
-const pathToCheck = "/Users/albalucia/Desktop/curso/modulos/prueba.md"
+const pathToCheck = "README.md"
+
+/* ------------------------------------ */
+const  getAbsolutePath = (userPath) => path.resolve(userPath)
+const isDirectory = (absolutePath) => fs.statSync(absolutePath).isDirectory();
+const isFile= (absolutePath) =>fs.statSync(absolutePath).isFile();
+const checkMdExt =(absolutePath) =>  path.extname(absolutePath) === '.md'
+
+/* ------------------------------------ */
+const pathsFilesMd = [];
+const filesPromises = [];
+const  linksFiles = [];
+
+/* ------------------------------------ */
 
 
-// AXIOS Realizar peticiones HTTP desde Nodejs.
-// Transforma automáticamente la información en formato JSON.
+/* ------------------------------------ */
+
+const getLinksOfFiles = (pathsMdFiles) => {
+  pathsMdFiles.forEach((file) => filesPromises.push(findLinksInMd(file)));
+  Promise.all(filesPromises)
+          .then((res) => console.log(res.flat()))
+  };
 
 
-const findLinksInMd = (path) => {
-  return new Promise((resolve, reject) => {
-    fs.readFile(path, "utf-8", function (err, data) {
-      const regex = /\[([^\[]+)\](\(.*\))/gm;
-      const arrayOfLinks = data.match(regex);
-      if (err) {
-        console.log('No found')
-        reject(err)
-      }
-      if (!arrayOfLinks) {
-        console.log("No links found it")
-        reject(err)
-      } else {
-        const links = arrayOfLinks.map((item) => {
-          const textHrefDivide = item.split("](")
-          const text = textHrefDivide[0].replace("[", "");
-          const href = textHrefDivide[1].replace(")", "");
-          return ({ href, text, path });
-        });
-        resolve(links)
-      }
-    });
-  });
+
+const dirOrFile = ( route) => {
+  if (isFile(route) && checkMdExt(route)){
+    getLinksOfFiles([route])
+    // findLinksInMd(route)
+    // .then((links)=> {
+    // console.log(links)
+}
+  if(isDirectory(route)) {
+  getLinksOfFiles(getFilesMd(route))
+
+  //  Promise.all(linksValidatePromises)
+  //   .then((stats) => {
+  //      console.log(stats)
+
+  //   })
+
+  }
 };
 
+// console.log(getLinksOfFiles( 'README.md' ))
 
 
-
+// "/Users/albalucia/Desktop/bog001-md-links/README.md"
+  // console.log(getLinksOfFiles(dirOrFile("/Users/albalucia/Desktop/curso/")))
 
 
 // AXIOS Realizar peticiones HTTP desde Nodejs.
 // Transforma automáticamente la información en formato JSON.
+/* ------------------------------------ */
 const linkValidate = (url, text, path) =>
   new Promise((resolve) =>
     axios(url)
@@ -56,50 +72,82 @@ const linkValidate = (url, text, path) =>
 const linksValidatePromises = [];
 
 const resolveValidate = (links) => {
-  links.map(({ href, text, path }) =>
+  links.forEach(({ href, text, path }) =>{
+  if (!/^https?:\/\//i.test(href)) {
+    href = 'http://' + href;
+    };
     linksValidatePromises.push(linkValidate(href, text, path))
-  );
+});
   Promise.all(linksValidatePromises)
     .then((stats) => {
-      // return (stats)
-      console.log(stats)
-        ;
+       console.log(stats)
+
     })
     .catch(() => reject(new Error(`No links to validate were found on the ${path}`)));
 };
 
+/* ------------------------------------ */
+const getLinksInFiles = (linksInFile) => {
+  linksInFile.forEach((file) => linksFiles.push(resolveValidate(file)));
+  Promise.all(filesPromises)
+          .then((res) => console.log(res))
+  };
 
 
-// console.log(resolveValidate([
+
+/* ------------------------------------ */
+// const arrayOfPaths = ['./readmePrueba.md', "/Users/albalucia/Desktop/bog001-md-links/readmePrueba.md"]
+
+
+
+// console.log(getLinksOfFiles(arrayOfPaths))
+
+
+// console.log(getLinksInFiles([
+
 //   {
-//     href: 'https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback',
-//     text: 'Leer un archivo',
-//     path: '/Users/albalucia/Desktop/bog001-md-links/README.md'
+//     href: 'wikipedia.org/wiki/Markdown',
+//     text: 'Markdown',
+//     path: '/Users/albalucia/Desktop/curso/modulos/hola/ok.md'
 //   },
 //   {
-//     href: 'https://nodejs.org/404',
-//     text: 'Leer un directorio',
-//     path: '/Users/albalucia/Desktop/bog001-md-links/README.md'
+//     href: 'https://nodejs.org/',
+//     text: 'Node.js',
+//     path: '/Users/albalucia/Desktop/curso/modulos/hola/ok.md'
 //   },
 //   {
-//     href: 'https://nodejs.omedium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e',
-//     text: 'Path',
-//     path: '/Users/albalucia/Desktop/bog001-md-links/README.md'
-//   }]))
+//     href: 'https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg',
+//     text: 'md-links',
+//     path: '/Users/albalucia/Desktop/curso/modulos/hola/ok.md'
+//   }
 
 
+// ]]))
+
+/* ------------------------------------ */
 const linksStats = (links) => {
   const total = links.length;
   const failedLinks = links.filter(({ statusText }) => statusText === 'FAIL');
   const broken = failedLinks.length
   console.log({ total, broken })
-};
+}
+
+
+
+
 // The split method divides a String into an ordered list of substrings into an ordered list of substrings and returns an array.
 
-console.log(linksStats([
+const array= [[
   {
     url: 'https://es.wikipedia.org/wiki/Markdown',
     text: 'Markdown',
+    file: '/Users/albalucia/Desktop/bog001-md-links/README.md',
+    status: 404,
+    statusText: 'OK'
+  },
+  {
+    url: 'https://nodejs.org/',
+    text: 'Node.js',
     file: '/Users/albalucia/Desktop/bog001-md-links/README.md',
     status: 404,
     statusText: 'OK'
@@ -117,31 +165,78 @@ console.log(linksStats([
     file: '/Users/albalucia/Desktop/bog001-md-links/README.md',
     status: 200,
     statusText: 'OK'
-  }
-]))
+  },
+  {
+    url: 'https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg',
+    text: 'md-links',
+    file: '/Users/albalucia/Desktop/bog001-md-links/README.md',
+    status: 200,
+    statusText: 'OK'
+  },
+
+]]
+
+// var flags = [], output = [], l = array.length, i;
+// for( i=0; i<l; i++) {
+//     if( flags[array[i].age]) continue;
+//     flags[array[i].age] = true;
+//     output.push(array[i].age);
+// }
+
+
+const getUnique = (array)  => {
+let output = [];
+let flags = {};
+for( i=0; i<array.length; i++) {
+    if( flags[array[i].url]) continue;
+    flags[array[i].url] = true;
+    output.push(array[i].url);
+}
+ return output.length
+}
+
+console.log(getUnique(array))
+// console.log(l)
+
+// const unique = [...new Set(data.map(item => item.group))];
 
 
 
-const arrayOfPaths = ['/Users/albalucia/Desktop/bog001-md-links/readmePrueba copy.md', "/Users/albalucia/Desktop/bog001-md-links/readmePrueba.md"]
-const filesPromises = [];
-
-const getLinksOfFiles = (pathsMdFiles) => {
-pathsMdFiles
-  .reverse()
-  .forEach((file) => filesPromises.push(findLinksInMd(file)));
-};
-// console.log(getLinksOfFiles(arrayOfPaths))
-// console.log(getLinksOfFiles(arrayOfPaths))
-
+// findLinksInMd ()
+// .then((links)=> {
+//   return resolveValidate(links)
 // })
-findLinksInMd(pathToCheck)
-.then((links)=> {
-  return resolveValidate(links)
-})
-.then((stats)=> {
-  // console.log(stats)
-  return resolveValidate(stats)})
-
+// .then((stats)=> {
+//   console.log(stats)
+//   //  return resolveValidate(stats)
+// })
+// .catch((error)=>
+// console.log(error))
 
   // .then((links)=> {return resolveValidate(links) })
 // .catch(error => console.error(error));
+
+
+const mdLinks = (route, options) => {
+      const pathRoute = getAbsolutePath(route);
+      if (fs.existsSync(pathRoute)) {
+        dirOrFile(pathRoute)
+        // if (!!options && options.validate){
+          // getLinksInFiles( dirOrFile(pathRoute))
+          // dirOrFile(pathRoute)
+          // .then((links)=> {
+          //     return resolveValidate(links)
+          //   })
+
+        // }
+      }
+    }
+
+    // "./some/example.md", { validate: true }
+    //!!oObject // non inverted boolean so true boolean representation
+
+
+
+
+  console.log(mdLinks("/Users/albalucia/Desktop/bog001-md-links/readmePrueba.md",{ validate: true } ))
+
