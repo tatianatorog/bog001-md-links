@@ -52,7 +52,7 @@ const mdLinks = (route, { validate }) => {
   if (fs.existsSync(pathRoute)) {
     const arrayFiles = dirOrFile(pathRoute);
     return Promise.all(utils.getLinksOfFiles(arrayFiles))
-      .then((links) => (links.flat()))
+      .then((links) => links.flat())
       .then((res) => {
         if (validate) {
           return resolveValidate(res);
@@ -66,9 +66,10 @@ const mdLinks = (route, { validate }) => {
 
 //! !oObject // non inverted boolean so true boolean representation
 
-mdLinks('test/readmePrueba.md', { validate: true })
+mdLinks("/Users/albalucia/Desktop/bog001-md-links/test/directory", { validate: true })
   .then((links) => console.log(links));
 
 const functions = {};
 functions.linkValidate = linkValidate;
+functions.mdLinks = mdLinks;
 module.exports = functions;

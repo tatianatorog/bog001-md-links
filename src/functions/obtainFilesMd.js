@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const utils = require('./obtainLinks');
 
+ let pathsFilesMd = [];
 // const pathsFilesMd = [];
 
 const isDirectory = (absolutePath) => fs.statSync(absolutePath).isDirectory();
@@ -10,7 +11,6 @@ const checkMdExt = (absolutePath) => path.extname(absolutePath) === '.md';
 
 const getFilesMd = (directory) => {
   const files = fs.readdirSync(directory);
-  const pathsFilesMd = [];
   for (let filename of files) {
     const filePath = path.join(directory, filename);
     if (isDirectory(filePath)) {
@@ -31,5 +31,5 @@ const dirOrFile = (route) => {
   }
   return [];
 };
-
+console.log(getFilesMd("test/directory"))
 module.exports = dirOrFile;
