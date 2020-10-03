@@ -3,9 +3,9 @@ const fs = require('fs');
 const getLinksInMd = (file) => new Promise((resolve, reject) => {
   fs.readFile(file, 'utf-8', (err, data) => {
     const regex = /\[([^[]+)\](\(.*\))/gm;
-    if (err) {
-      reject(new Error('No such a file'));
-    } else if (data.match(regex)) {
+    // if (err) {
+    //   reject(new Error('No such a file'));
+   if (data.match(regex)) {
       const arrayOfLinks = data.match(regex);
       const links = arrayOfLinks.map((item) => {
         const textHrefDivide = item.split('](');
@@ -15,7 +15,7 @@ const getLinksInMd = (file) => new Promise((resolve, reject) => {
       });
       const blacklist = '#';
       const getLinksWithUrl = links.filter((object) => !object.href.startsWith(blacklist));
-     resolve(getLinksWithUrl);
+      resolve(getLinksWithUrl);
     } else {
       reject(new Error('No links found it'));
     }
@@ -27,11 +27,11 @@ const getLinksOfFiles = (pathsMdFiles) => {
   return filesPromises;
 };
 
-console.log(getLinksOfFiles([
-  'test/directory/concepts/fundamentals/async/testing.md',
-  'test/directory/concepts/fundamentals/introduction.md',
-  'test/directory/readmeA.md',
-]));
+// console.log(getLinksOfFiles([
+//   'test/directory/concepts/fundamentals/async/testing.md',
+//   'test/directory/concepts/fundamentals/introduction.md',
+//   'test/directory/readmeA.md',
+// ]));
 
 // console.log(filesPromises)
 

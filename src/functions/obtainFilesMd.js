@@ -31,5 +31,5 @@ const dirOrFile = (route) => {
   }
   return [];
 };
-console.log(getFilesMd("test/directory"))
+
 module.exports = dirOrFile;

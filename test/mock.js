@@ -15,7 +15,7 @@
     file: '/Users/albalucia/Desktop/bog001-md-links/test/readmePrueba.md'
   },
   {
-    href: 'http://servername/fcm.web/api/consolidation/history/job',
+    href: 'http://servername/fcm.web/api/consolidation/history/jobs',
     text: 'md-links',
     file: '/Users/albalucia/Desktop/bog001-md-links/test/readmePrueba.md',
   }

@@ -6,7 +6,7 @@
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
-const dirOrFile = require('./functions/obtainFilesMd');
+const dirOrFile = require('./functionsobtainFilesMd');
 const utils = require('./functions/obtainLinks');
 
 /* ------------------------------------ */
@@ -16,8 +16,8 @@ const linksValidatePromises = [];
 
 /* ------------------------------------ */
 
-// AXIOS Realizar peticiones HTTP desde Nodejs.
-// Transforma automáticamente la información en formato JSON.
+/* AXIOS Realizar peticiones HTTP desde Nodejs.
+Transforma automáticamente la información en formato JSON. */
 /* ------------------------------------ */
 const linkValidate = (url, text, file) => new Promise((resolve) => axios.get(url)
   .then((res) => resolve({
@@ -57,7 +57,7 @@ const mdLinks = (route, { validate }) => {
         if (validate) {
           return resolveValidate(res);
         }
-        console.log('links w/o options ', res);
+        // console.log('links w/o options ', res);
         return res;
       });
   }
@@ -65,9 +65,8 @@ const mdLinks = (route, { validate }) => {
 };
 
 //! !oObject // non inverted boolean so true boolean representation
-
-mdLinks("/Users/albalucia/Desktop/bog001-md-links/test/directory", { validate: true })
-  .then((links) => console.log(links));
+// mdLinks('/Users/albalucia/Desktop/curso', { validate: true })
+//   .then((links) => console.log(links));
 
 const functions = {};
 functions.linkValidate = linkValidate;

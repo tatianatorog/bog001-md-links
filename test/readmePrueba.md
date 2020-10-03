@@ -17,4 +17,4 @@ algunas estadísticas.
 
 ([`import`](developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
 
-![md-links](http://servername/fcm.web/api/consolidation/history/job)
+![md-links](http://servername/fcm.web/api/consolidation/history/jobs)
