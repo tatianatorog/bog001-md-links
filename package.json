@@ -7,7 +7,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest --verbose --coverage"
+    "test": "jest --verbose --coverage",
+    "start": "node src/cli.js"
+
   },
   "repository": {
     "type": "git",
@@ -30,9 +32,11 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "chalk": "^4.1.0",
     "fast-glob": "^3.2.4",
     "file-set": "^4.0.1",
     "glob": "^7.1.6",
+    "inquirer": "^7.3.3",
     "jest": "^26.4.2",
     "linkify-it": "^3.0.2",
     "nodemon": "^2.0.4"

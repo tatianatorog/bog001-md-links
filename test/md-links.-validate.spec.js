@@ -3,15 +3,15 @@ const axios = require('axios');
 const functions = require('../src/index.js');
 // const arrayMock = require('./mock.js');
 
-// we want a fresh start after each test
-afterEach(() => {
-  jest.clearAllMocks();
-});
+
+// afterEach(() => {
+//   jest.clearAllMocks();
+// });
 
 
 jest.mock('axios');
 
-// it('It should return a 200 status when the link is OK', () => { // deberia retornar 200 cuando el link esta bien
+// it('It should return a 200 status when the link is OK', () => {
 //   jest.spyOn(axios, 'get').mockImplementation(() => Promise.resolve({
 //     status: 200,
 //     statusText: 'OK',
@@ -46,11 +46,25 @@ it('validates an invalid link', (done) => {
       statusText: 'FAIL',
       text: "md-links",
       url: "http://servername/fcm.web/api/consolidation/history/jobs"
-
-    });
+    })
     expect(axios.get).toHaveBeenCalledWith('http://servername/fcm.web/api/consolidation/history/jobs');
     done();
-  });
+  })
 });
 
 
+
+// test('Falla cuando la url está mal escrita', () => {
+//   //expect.assertions(1);
+//   return functions.mdLinks('test/readmePrueba.md',{ validate: true }).catch((links) => {
+//       //console.log(e.message); //Network Error
+//       expect(links[3]).toEqual({
+//         file: "/Users/albalucia/Desktop/bog001-md-links/test/readmePrueba.md",
+//         status: 404,
+//         statusText: 'FAIL',
+//         text: "md-links",
+//         url: "http://servername/fcm.web/api/consolidation/history/jobs"
+//       });
+//   });
+// });
+// })

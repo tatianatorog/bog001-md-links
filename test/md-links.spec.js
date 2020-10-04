@@ -18,7 +18,6 @@ it('It should read a Markdown file and extract the links from it', () => {
   });
 });
 
-
 it('Fails when there are not links in file', () => {
   const userPath = 'test/readmeNoLinks.md';
   return functions.mdLinks(userPath, { validate: false }).catch((e) => {
@@ -30,6 +29,6 @@ test('should throw an error if the path is not correct', () => {
   expect(() => {
     const userPath = 'course/readmeNoLinks.md';
     functions.mdLinks(userPath, { validate: false });
-  }).toThrow('No such a file o directory');
+  }).toThrow("Path: NOT FOUND (check the NAME of DIR \\ FILE or .md) )");
 });
 

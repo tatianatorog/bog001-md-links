@@ -3,47 +3,17 @@
 //   // ...
 // };
 
+const chalk = require('chalk');
 const path = require('path');
 const fs = require('fs');
 const axios = require('axios');
-const dirOrFile = require('./functionsobtainFilesMd');
-const utils = require('./functions/obtainLinks');
+const dirOrFile = require('./functions/obtainFilesMd');
+const resolveValidate = require('./functions/validateLinks.js')
+const utils = require('./functions/obtainLinks.js');
 
 /* ------------------------------------ */
 
 const getAbsolutePath = (userPath) => path.resolve(userPath);
-const linksValidatePromises = [];
-
-/* ------------------------------------ */
-
-/* AXIOS Realizar peticiones HTTP desde Nodejs.
-Transforma automáticamente la información en formato JSON. */
-/* ------------------------------------ */
-const linkValidate = (url, text, file) => new Promise((resolve) => axios.get(url)
-  .then((res) => resolve({
-    url, text, file, status: res.status, statusText: res.statusText,
-  }))
-  .catch(() => resolve({
-    url, text, file, status: 404, statusText: 'FAIL',
-  })));
-
-const resolveValidate = (links) => {
-  links.forEach(({ href, text, file }) => {
-    let url = href;
-    if (!/^https?:\/\//i.test(href)) {
-      url = `http://${href}`;
-    }
-    linksValidatePromises.push(linkValidate(url, text, file));
-  });
-  return Promise.all(linksValidatePromises)
-    .catch(() => (new Error('No internet connection')));
-};
-
-/* ------------------------------------ */
-
-/* ------------------------------------ */
-
-// console.log(getLinksOfFiles(arrayOfPaths))
 
 /* ------------------------------------ */
 
@@ -59,16 +29,21 @@ const mdLinks = (route, { validate }) => {
         }
         // console.log('links w/o options ', res);
         return res;
-      });
+      })
+      .catch(() => new Error(
+        `${chalk.red('NOT found links')} ${chalk.yellow(pathRoute)}`,
+      ));
   }
-  throw Error('No such a file o directory');
+  throw Error(chalk.red(
+    'Path: NOT FOUND (check the NAME of DIR \\ FILE or .md) )',
+  ));
+  // it stops the program.
 };
 
-//! !oObject // non inverted boolean so true boolean representation
-// mdLinks('/Users/albalucia/Desktop/curso', { validate: true })
-//   .then((links) => console.log(links));
-
+// mdLinks('/Users/albalucia/Desktop/curso', {
+//   validate: true})
+// .then((links) => console.log(links))
+// .catch((error) => console.error(error));
 const functions = {};
-functions.linkValidate = linkValidate;
 functions.mdLinks = mdLinks;
 module.exports = functions;
