@@ -1,4 +1,45 @@
 {
-  "name": "md-links",
-  "version": "0.1.0"
+  "name": "markdown-links-validator",
+  "version": "1.0.5",
+  "description": "Validate markdown links",
+  "main": "src/index.js",
+  "bin": "src/cli.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest --verbose --coverage",
+    "start": "node src/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tatianatorog/bog001-md-links.git"
+  },
+  "keywords": [
+    "node.js",
+    "markdown",
+    "valide",
+    "stats",
+    "links",
+    "url"
+  ],
+  "author": "Tatiana Toro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tatianatorog/bog001-md-links/issues"
+  },
+  "homepage": "https://github.com/tatianatorog/bog001-md-links#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "chalk": "^4.1.0",
+    "inquirer": "^7.3.3",
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4"
+  }
 }

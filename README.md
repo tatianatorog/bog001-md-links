@@ -16,7 +16,7 @@
 
 ## 1. Preámbulo
 
-[Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
+[Markdown](wikipedia.org/wiki/Markdown) es un lenguaje de marcado
 ligero muy popular entre developers. Es usado en muchísimas plataformas que
 manejan texto plano (GitHub, foros, blogs, ...), y es muy común
 encontrar varios archivos en ese formato en cualquier tipo de repositorio
@@ -35,7 +35,7 @@ algunas estadísticas.
 
 ## 2. Resumen del proyecto
 
-[Node.js](https://nodejs.org/es/) es un entorno de ejecución para JavaScript
+[Node.js](nodejs.org/es/) es un entorno de ejecución para JavaScript
 construido con el [motor de JavaScript V8 de Chrome](https://developers.google.com/v8/).
 Esto nos va a permitir ejecutar JavaScript en el entorno del sistema operativo,
 ya sea tu máquina o un servidor, lo cual nos abre las puertas para poder
@@ -107,7 +107,7 @@ A continuación puedes ver los objetivos de aprendizaje de este proyecto:
 
 ### Fundamentos de programación
 
-* [ ] [Recursión.](https://www.youtube.com/watch?v=lPPgY3HLlhQ)
+* [ ] [Recursión.](www.youtube.com/watch?v=lPPgY3HLlhQ)
 
 ***
 
@@ -356,18 +356,17 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 * [Node.js - Wikipedia](https://es.wikipedia.org/wiki/Node.js)
 * [What exactly is Node.js? - freeCodeCamp](https://medium.freecodecamp.org/what-exactly-is-node-js-ae36e97449f5)
 * [¿Qué es Node.js y para qué sirve? - drauta.com](https://www.drauta.com/que-es-nodejs-y-para-que-sirve)
-* [¿Qué es Nodejs? Javascript en el Servidor - Fazt en YouTube](https://www.youtube.com/watch?v=WgSc1nv_4Gw)
+* [¿Qué es Nodejs? Javascript en el Servidor - Fazt en YouTube](www.youtube.com/watch?v=WgSc1nv_4Gw)
 * [¿Simplemente qué es Node.js? - IBM Developer Works, 2011](https://www.ibm.com/developerworks/ssa/opensource/library/os-nodejs/index.html)
 * [Node.js y npm](https://www.genbeta.com/desarrollo/node-js-y-npm)
 * [Módulos, librerías, paquetes, frameworks... ¿cuál es la diferencia?](http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175)
 * [Asíncronía en js](https://carlosazaustre.com/manejando-la-asincronia-en-javascript/)
-* [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
+* [NPM](https://docs.npmjs.com/404/)
 * [Publicar packpage](https://docs.npmjs.com/getting-started/publishing-npm-packages)
 * [Crear módulos en Node.js](https://docs.npmjs.com/getting-started/publishing-npm-packages)
 * [Leer un archivo](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)
 * [Leer un directorio](https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback)
-* [Path](https://nodejs.org/api/path.html)
-* [Linea de comando CLI](https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e)
+* [Path](https://nodejs.omedium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e)
 
 ## 9. Checklist
 
