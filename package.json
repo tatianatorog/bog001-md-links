@@ -1,8 +1,8 @@
 {
-  "name": "markdown-links-validator",
-  "version": "1.0.5",
+  "name": "md-validator",
+  "version": "1.0.6",
   "description": "Validate markdown links",
-  "main": "src/index.js",
+  "main": "src/cli.js",
   "bin": "src/cli.js",
   "directories": {
     "test": "test"
@@ -19,6 +19,7 @@
     "node.js",
     "markdown",
     "valide",
+    "validator",
     "stats",
     "links",
     "url"

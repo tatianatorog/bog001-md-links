@@ -1,16 +1,11 @@
 /* eslint-disable no-console */
-// module.exports = () => {
-//   // ...
-// };
 
 const chalk = require('chalk');
 const path = require('path');
 const fs = require('fs');
-const axios = require('axios');
 const dirOrFile = require('./functions/obtainFilesMd');
 const resolveValidate = require('./functions/validateLinks.js')
 const utils = require('./functions/obtainLinks.js');
-
 
 /* ------------------------------------ */
 
@@ -31,9 +26,9 @@ const mdLinks = (route, { validate }) => {
         // console.log('links w/o options ', res);
         return res;
       })
-      // .catch(() => new Error(
-      //   `${chalk.red('NOT found links')} ${chalk.yellow(pathRoute)}`,
-      // ));
+      .catch(() => new Error(
+        `${chalk.red('NOT found links')} ${chalk.yellow(pathRoute)}`,
+      ));
   }
   throw Error(chalk.red(
     'Path: NOT FOUND (check the NAME of DIR \\ FILE or .md) )',
