@@ -1,17 +1,6 @@
 const inquirer = require("inquirer");
 const functions = require("./index.js")
-// inquirer.prompt([
-//       {
-//         type: 'fuzzypath',
-//         name: 'path',
-//         itemType: 'any',
-//         message: 'Select a target directory for your component:',
-//         suggestOnly: false,
-//       }
-//     ])
-//     .then((answers ) => {
-//       console.log(answers);
-//     })
+const statsValidate = require('./functions/obtainStats.js')
 
 inquirer
   .prompt([
@@ -34,51 +23,22 @@ inquirer
    if (answers.path === ""){
     throw Error ("You need to provide a path exp src/readme")
    }
-   if (answers.options === 'validate'){
+    else if (answers.options === 'validate'){
     return functions.mdLinks(answers.path, {validate: true} )
     .then((links) => console.log(links))
     .catch((error) => console.error(error))
-    // if (answers.options === 'stats'){
+   } else if (answers.options === 'stats'){
+    return functions.mdLinks(answers.path, {validate: true} )
+    .then((links) => console.log(statsValidate(links)))
+    .catch((error) => console.error(error))
+   }else {
+    return functions.mdLinks(answers.path, {validate: true} )
+    .then((links) => console.log(statsValidate(links, isValidate = true)))
+    .catch((error) => console.error(error))
    }
    })
-
   .catch((error) => {
     console.log(error)
-    // if (error.isTtyError) {
-    //   // Prompt couldn't be rendered in the current environment
-    // } else {
-    //   // Something else when wrong
-    // }
+
   });
 
-// inquirer.prompt([
-//     {
-//       type: 'fuzzypath',
-//       name: 'path',
-//       itemType: 'any',
-//       message: 'Select a target directory for your component:',
-//       suggestOnly: false,
-//     }
-//   ])
-//   .then((answers ) => {
-//     console.log(answers);
-//   })
-if (validate && stats) {
-  return mdLinks(route, { validate })
-    .then((links) => console.log(statsValidate(links)))
-    .catch(() => new Error('Doesn\'t exist links'));
-}
-if (validate) {
-  return mdLinks(route, { validate })
-    .then((links) => console.log(showValidateLink(links)))
-    .catch(() => new Error('Doesn\'t exist links'));
-}
-if (stats) {
-  return mdLinks(route, { validate })
-    .then((links) => console.log(statsInfo(links)))
-    .catch(() => new Error('Doesn\'t exist links'));
-}
-return mdLinks(route, { validate })
-  .then((links) => console.log(showExtractLink(links)))
-  .catch(() => new Error('Doesn\'t exist links'));
-};

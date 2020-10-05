@@ -1,15 +1,27 @@
-const linksStats = (links) => {
+const chalk = require('chalk')
+
+const statsValidate = (links, isValidate) => {
   const total = links.length;
   const failedLinks = links.filter(({ statusText }) => statusText === 'FAIL');
+  const unique = [...new Set(links.map(item => item.url))].length;
   const broken = failedLinks.length;
-  // eslint-disable-next-line no-console
-  console.log({ total, broken });
+  // return({ total, broken , unique  });
+  const stats= chalk.blueBright(
+    `✔ Total : ${total}\n✔ Unique : ${unique}`
+  )
+  if (isValidate) {
+    return  `${stats}\n${chalk.red(`✖ Broken : ${broken}`)}`
+  }else{
+    return stats
+  }
+
 };
+
 
 // The split method divides a String into an ordered list of substrings
 // into an ordered list of substrings and returns an array.
 
-const array = [[
+const array = [
   {
     url: 'https://es.wikipedia.org/wiki/Markdown',
     text: 'Markdown',
@@ -46,7 +58,7 @@ const array = [[
     statusText: 'OK',
   },
 
-]];
+];
 
 const getUnique = (array) => {
   const output = [];
@@ -59,4 +71,5 @@ const getUnique = (array) => {
   return output.length;
 };
 
-console.log(getUnique(array));
+module.exports = statsValidate
+// console.log(statsValidate(array, isValidate=true));
