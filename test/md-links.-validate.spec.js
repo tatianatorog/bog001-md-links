@@ -1,12 +1,6 @@
-const path = require('path');
 const axios = require('axios');
 const functions = require('../src/index.js');
-// const arrayMock = require('./mock.js');
 
-
-// afterEach(() => {
-//   jest.clearAllMocks();
-// });
 
 
 jest.mock('axios');

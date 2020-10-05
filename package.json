@@ -1,6 +1,6 @@
 {
   "name": "md-validator",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Validate markdown links",
   "main": "src/cli.js",
   "bin": "src/cli.js",
@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "cfonts": "^2.8.6",
     "chalk": "^4.1.0",
     "inquirer": "^7.3.3",
     "jest": "^26.4.2",

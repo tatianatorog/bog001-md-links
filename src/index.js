@@ -36,9 +36,6 @@ const mdLinks = (route, { validate }) => {
   // it stops the program.
 };
 
-// mdLinks('/Users/albalucia/Desktop/bog001-md-links/README.md', {validate: true})
-// .then((links) => console.log(statsValidate(links, isValidate = true)))
-// .catch((error) => console.error(error));
 const functions = {};
 functions.mdLinks = mdLinks;
 module.exports = functions;

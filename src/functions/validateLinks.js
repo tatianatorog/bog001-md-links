@@ -1,4 +1,3 @@
-
 const axios = require('axios');
 
 const linkValidate = (url, text, file) => new Promise((resolve) => axios
@@ -28,10 +27,7 @@ const resolveValidate = (links) => {
     return linksValidatePromises.push(linkValidate(url, text, file));
   });
   return Promise.all(linksValidatePromises)
-  .then((stats) =>stats)
-  .catch(
-    () => new Error('No internet connection'),
-  );
+    .then((stats) => stats);
 };
 
-module.exports = resolveValidate
+module.exports = resolveValidate;
