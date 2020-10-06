@@ -9,7 +9,9 @@
   },
   "scripts": {
     "test": "jest --verbose --coverage",
-    "start": "node src/cli.js"
+    "start": "node src/cli.js",
+    "eslint": "eslint --ext .js src/ test/",
+    "eslintfix": "eslint --fix"
   },
   "repository": {
     "type": "git",

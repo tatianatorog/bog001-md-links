@@ -37,7 +37,7 @@ inquirer
     } else if (answers.options === "Validate") {
       return functions.mdLinks(answers.path, { validate: true }).then((links) =>
         links.forEach(({ file, url, status, statusText, text }) => {
-          console.log(`\n${chalk.yellow('FILE:', file)}\n ${chalk.cyan('URL:', url)}\n ${status < 400 ? chalk.green('STATUS:', status) : chalk.red(status)} ${statusText === 'OK' ? chalk.greenBright(statusText) : chalk.red(statusText)}\n ${chalk.white('TEXT:', text)}`,
+          console.log(`\n${chalk.yellow('FILE:', file)}\n ${chalk.cyan('URL:', url)}\n ${status < 400 ? chalk.green('STATUS:', status) : chalk.red('STATUS:', status)} ${statusText === 'OK' ? chalk.greenBright(statusText) : chalk.red(statusText)}\n ${chalk.white('TEXT:', text)}`,
           );
         }));
     } else if (answers.options === "Stats") {
