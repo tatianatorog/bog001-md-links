@@ -13,7 +13,7 @@ $ npm install @tatianatorog/md-validator
 
 ```
 
-## CLI (Command Line Interface - Interfaz de Línea de Comando)
+## CLI 
 Get _markdowns links_ with this command:
 
 ```bash
