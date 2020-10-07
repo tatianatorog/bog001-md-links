@@ -1,16 +1,5 @@
 # Markdown Links
 
-## Índice
-
-
-
-## 1. Preámbulo
-
-que lea y analice archivos
-en formato `Markdown`, para verificar los links que contengan y reportar
-algunas estadísticas.
-
-
 ### JavaScript
 
 * [x] Uso de condicionales (if-else | switch | operador ternario)
@@ -314,6 +303,78 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 
 ### Pruebas / tests
 
-* [ ] Pruebas unitarias cubren un mínimo del 70% de statements, functions,
+* [X] Pruebas unitarias cubren un mínimo del 70% de statements, functions,
   lines, y branches.
-* [ ] Pasa tests (y linters) (`npm test`).
+* [X] Pasa tests (y linters) (`npm test`).
+
+
+- **Install the _CLI_ locally or globally:**
+
+```bash
+$ npm install
+
+$ npm install
+
+$ npm install
+
+$ npm install
+```
+
+- **Now, get _markdowns links_ with this command:**
+
+```bash
+$ npx md-validator <path-to-file> [options]
+```
+
+_For example:_
+
+```bash
+$ npx md-validator ./some/example.md
+
+./some/example.md http://ubu.com/2/3/ Link to something
+./some/example.md https://deco.net/algun-doc.html some file
+./some/example.md http://google.com/ Google
+```
+
+## OPTIONS 🔨
+
+##### `-v | --validate`
+
+- **Pass _validate_ option to check & validate all markdown's link(s):**
+
+```bash
+$ npx md-validator ./some/example.md -v
+$ npx md-validator ./some/example.md --validate
+
+./some/example.md http://ubu.com/2/3/ ok 200 Link to something
+./some/example.md https://deco.net/algun-doc.html fail 404 some file
+./some/example.md http://google.com/ ok 301 Google
+```
+
+##### `-s | --stats`
+
+- **Pass _stats_ option to get the total & unique(s) of markdown's link(s):**
+
+```bash
+$ npx md-validator ./some/ -s
+$ npx md-validator ./some/example.md --stats
+
+Total: 3
+Unique: 3
+```
+
+##### `-v -s | --validate --stats`
+
+- **You can pass _both_ options for totals & link's status:**
+
+```bash
+$ npx md-validator some -v -s
+$ npx md-validator some/example.md --validate --stats
+
+Total: 3
+Unique: 3
+Broken: 1
+
+```
+
+---
