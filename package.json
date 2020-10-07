@@ -1,15 +1,17 @@
 {
   "name": "md-validator",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Validate markdown links",
   "main": "src/cli.js",
-  "bin": "src/cli.js",
+  "bin": "newCli.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "jest --verbose --coverage",
-    "start": "node src/cli.js"
+    "start": "node src/cli.js",
+    "eslint": "eslint --ext .js src/ test/",
+    "eslintfix": "eslint -- --fix"
   },
   "repository": {
     "type": "git",
@@ -40,6 +42,8 @@
     "axios": "^0.20.0",
     "cfonts": "^2.8.6",
     "chalk": "^4.1.0",
+    "commander": "^6.1.0",
+    "eslint-plugin-jest": "^24.1.0",
     "inquirer": "^7.3.3",
     "jest": "^26.4.2",
     "nodemon": "^2.0.4"
