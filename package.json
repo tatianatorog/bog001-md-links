@@ -7,6 +7,9 @@
   "directories": {
     "test": "test"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "test": "jest --verbose --coverage",
     "start": "node src/cli.js",
