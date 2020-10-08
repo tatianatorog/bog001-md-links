@@ -7,7 +7,7 @@ const getLinksInMd = (file) => new Promise((resolve, reject) => {
       const arrayOfLinks = data.match(regex);
       const links = arrayOfLinks.map((item) => {
         const textHrefDivide = item.split('](');
-        const text = textHrefDivide[0].replace('[', '');
+        const text = textHrefDivide[0].replace('[', '').substring(0, 50);
         const href = textHrefDivide[1].replace(')', '');
         return ({ href, text, file });
       });

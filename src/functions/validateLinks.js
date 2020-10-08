@@ -1,33 +1,19 @@
 const axios = require('axios');
 
-const linkValidate = (url, text, file) => new Promise((resolve) => axios
-  .get(url)
-  .then((res) => resolve({
-    url,
-    text,
-    file,
-    status: res.status,
-    statusText: res.statusText,
-  }))
-  .catch(() => resolve({
-    url,
-    text,
-    file,
-    status: 404,
-    statusText: 'FAIL',
-  })));
-
-const resolveValidate = (links) => {
-  const linksValidatePromises = [];
-  links.forEach(({ href, text, file }) => {
-    let url = href;
-    if (!/^https?:\/\//i.test(href)) {
-      url = `http://${href}`;
+const resolveValidate = (getLinksUrl) => {
+  const arrValidate = getLinksUrl.map((link) => {
+    let url = link.href;
+    if (!/^https?:\/\//i.test(url)) {
+      url = `http://${url}`;
     }
-    return linksValidatePromises.push(linkValidate(url, text, file));
+    return axios.get(url)
+      .then((res) => ({ ...link, status: res.status, statusText: res.statusText }))
+      .catch(() => ({
+        ...link, status: 404, ok: false, statusText: 'FAIL',
+      }));
   });
-  return Promise.all(linksValidatePromises)
-    .then((stats) => stats);
+
+  return Promise.all(arrValidate);
 };
 
 module.exports = resolveValidate;

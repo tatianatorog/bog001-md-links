@@ -37,10 +37,10 @@ inquirer
       throw Error('You need to provide a path exp src/readme');
     } else if (answers.options === 'Validate') {
       return mdLinks(answers.path, { validate: true }).then((links) => links.forEach(({
-        file, url, status, statusText, text,
+        file, href, status, statusText, text,
       }) => {
         console.log(
-          `\n${chalk.yellow('FILE:', file)}\n ${chalk.cyan('URL:', url)}\n ${
+          `\n${chalk.yellow('FILE:', file)}\n ${chalk.cyan('URL:', href)}\n ${
             status < 400
               ? chalk.green('STATUS:', status)
               : chalk.red('STATUS:', status)

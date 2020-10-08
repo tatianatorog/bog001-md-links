@@ -12,7 +12,7 @@ it('It should return a 200 status when the link is OK', (done) => {
   return mdLinks(route, { validate: true }).then((links) => {
     expect(links).toHaveLength(4);
     expect(links[0]).toEqual({
-      url: 'https://nodejs.org/',
+      href: 'https://nodejs.org/',
       text: 'Node.js',
       file: '/Users/albalucia/Desktop/bog001-md-links/test/readmePrueba.md',
       status: 200,
